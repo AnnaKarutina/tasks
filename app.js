@@ -6,6 +6,17 @@ form.addEventListener('submit', addTask)
 const taskList = document.querySelector('ul')
 taskList.addEventListener('click', delTask)
 
+// delete button-link
+const deleteBtn = document.querySelector('#delete-tasks')
+deleteBtn.addEventListener('click', delTasks)
+
+function delTasks(){
+    // taskList.innerHTML = ''
+    while(taskList.firstChild){
+        taskList.removeChild(taskList.firstChild)
+    }
+}
+
 // delTask
 function delTask(event){
     if(event.target.textContent === 'X'){
