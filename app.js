@@ -10,6 +10,44 @@ taskList.addEventListener('click', delTask)
 const deleteBtn = document.querySelector('#delete-tasks')
 deleteBtn.addEventListener('click', delTasks)
 
+// page reload
+document.addEventListener('DOMContentLoaded', getTasks)
+
+// getTasks
+function getTasks(){
+    // get data from LS
+    let tasks
+    if(localStorage.getItem('tasks') === null){
+        tasks = []
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+    }
+    // for each task in tasks
+    tasks.forEach(function(taskFromLS){
+        // create li and add to taskList
+        // create element to DOM
+        const li = document.createElement('li')
+        // add CSS class
+        li.className = 'collection-item'
+        // add text to element
+        const text = document.createTextNode(taskFromLS)
+        li.appendChild(text)
+        // create link
+        const link = document.createElement('a')
+        // add css style
+        link.className = 'secondary-content'
+        // add text to link
+        link.appendChild(document.createTextNode('X'))
+        // add href attribute
+        link.setAttribute('href', '#')
+        // add link to li
+        li.appendChild(link)
+        // add li to taskList
+        taskList.appendChild(li)
+    })
+}
+
+
 function delTasks(){
     // taskList.innerHTML = ''
     while(taskList.firstChild){
